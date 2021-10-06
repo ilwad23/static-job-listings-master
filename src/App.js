@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useStateValue } from "./StateProvider";
 import "./App.css";
 import Tablet from "./Tablet";
-import Data from "./data";
+import "./tabletDesktop.css";
+import "./tabletMobile.css";
+
 
 const useScreenSize = () => {
   const [size, setSize] = useState(window.innerWidth);
@@ -16,8 +19,13 @@ const useScreenSize = () => {
 
 function App() {
   const desktopOrMobile = useScreenSize();
-  const filteredData = Data.filter((item) => item);
-  const allData = filteredData.map((item) => (
+  const [{ tags, filteredData }, dispatch] = useStateValue();
+  useEffect(() => {
+    console.log(tags);
+    dispatch({ type: "FILTER_TAGS" });
+  }, [tags])
+  ;
+  const tablets = filteredData.map((item) => (
     <Tablet
       key={item.id}
       NEW={item.new}
@@ -34,16 +42,38 @@ function App() {
       tools={item.tools}
     />
   ));
-  console.log(filteredData);
   return (
     <div className="App">
       <header className="App-header">
-        <img className="bg-header" src={`./images/bg-header-${desktopOrMobile}.svg`} />
+        <img
+          className="bg-header"
+          src={`./images/bg-header-${desktopOrMobile}.svg`}
+        />
+        {tags.length > 0 && (
+          <div className="filter ">
+            <div className="filterTags ">
+              {tags.map((tag) => (
+                <div className="filterTagWrapper">
+                  <div className="filterTag">{tag}</div>
+                  <div
+                    className="filterCancel"
+                    onClick={() => dispatch({ type: "CANCEL_TAG", tag: tag })}
+                  >
+                    <img src="./images/icon-remove.svg" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p
+              className="filterClear"
+              onClick={() => dispatch({ type: "CLEAR_TAGS" })}
+            >
+              Clear
+            </p>
+          </div>
+        )}
       </header>
-      <div className="tablets">
-        {/* <Fi */}
-        {allData}
-      </div>
+      <div className="tablets">{tablets}</div>
     </div>
   );
 }
