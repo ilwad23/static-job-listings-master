@@ -1,13 +1,9 @@
 import Data from "./data";
 export const initialState = {
   tags: [],
-  filteredData: []
+  filteredData: [],
+  changing:false,
 };
-// export const filterData = Data.filter((item) => {
-//   let items = [item.role, item.level, ...item.languages, ...item.tools];
-//   if (tags.length == 0) return item;
-//   return tags.every((v) => items.includes(v));
-// });
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -15,30 +11,50 @@ const reducer = (state, action) => {
       return {
         ...state,
         tags: action.tags,
+        changing: true,
       };
-      case "FILTER_TAGS":
-        const filterData = Data.filter((item) => {
-          let items = [item.role, item.level, ...item.languages, ...item.tools];
-          if (state.tags.length === 0) return item;
-          return state.tags.every((v) => items.includes(v));
-        });
-        return {
-          ...state,
-          filteredData: filterData,
-        };
-        case "CLEAR_TAGS":
-          return {
-            ...state,
-            tags: [],
-          };
-        case "CANCEL_TAG":
-          console.log(state.tags);
-          const filterTags = state.tags.filter(tag=>action.tag!==tag);
-          return {
-            ...state,
-            tags: filterTags,
-          };
-        default:
+    case "FILTER_TAGS":
+      console.log(state.tags,12);
+      const filterData = Data.filter((item) => {
+        let items = [item.role, item.level, ...item.languages, ...item.tools];
+        if (state.tags.length === 0) return item;
+        return state.tags.every((v) => items.includes(v));
+      });
+
+      return {
+        ...state,
+        filteredData: filterData,
+        changing: false,
+      };
+    // case "CLEAR_TAGS":
+    //   return {
+    //     ...state,
+    //     tags: [],
+    //   };
+    case "CANCEL_TAG":
+    //   const filterTags = state.tags.filter((tag) => action.tag !== tag);
+    //   return {
+    //     ...state,
+    //     tags: filterTags,
+    //   };
+
+    // case "REMOVE_FROM_BASKET":
+      const index = state.tags.indexOf(action.tag);
+      let newTags = [...state.tags];
+
+      if (index >= 0) {
+        newTags.splice(index, 1);
+      } else {
+        console.warn(
+          `Cant remove product (tag: ${action.tag}) as its not in the tags`
+        );
+      }
+      return {
+        ...state,
+        tags: newTags,
+        changing:true
+      };
+    default:
       return state;
   }
 };

@@ -19,12 +19,10 @@ const useScreenSize = () => {
 
 function App() {
   const desktopOrMobile = useScreenSize();
-  const [{ tags, filteredData }, dispatch] = useStateValue();
+  const [{ tags, filteredData, changing }, dispatch] = useStateValue();
   useEffect(() => {
-    console.log(tags);
-    dispatch({ type: "FILTER_TAGS" });
-  }, [tags])
-  ;
+    dispatch({ type: "FILTER_TAGS"});
+  },[changing]);
   const tablets = filteredData.map((item) => (
     <Tablet
       key={item.id}
@@ -66,7 +64,7 @@ function App() {
             </div>
             <p
               className="filterClear"
-              onClick={() => dispatch({ type: "CLEAR_TAGS" })}
+              // onClick={() => dispatch({ type: "CLEAR_TAGS" })}
             >
               Clear
             </p>
