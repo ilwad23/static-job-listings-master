@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static-job-listings-master/static/css/main.06fde177.chunk.css",
-    "main.js": "/static-job-listings-master/static/js/main.fa778e99.chunk.js",
-    "main.js.map": "/static-job-listings-master/static/js/main.fa778e99.chunk.js.map",
+    "main.js": "/static-job-listings-master/static/js/main.d4410915.chunk.js",
+    "main.js.map": "/static-job-listings-master/static/js/main.d4410915.chunk.js.map",
     "runtime-main.js": "/static-job-listings-master/static/js/runtime-main.80f8cdf6.js",
     "runtime-main.js.map": "/static-job-listings-master/static/js/runtime-main.80f8cdf6.js.map",
     "static/js/2.0eb0e367.chunk.js": "/static-job-listings-master/static/js/2.0eb0e367.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.80f8cdf6.js",
     "static/js/2.0eb0e367.chunk.js",
     "static/css/main.06fde177.chunk.css",
-    "static/js/main.fa778e99.chunk.js"
+    "static/js/main.d4410915.chunk.js"
   ]
 }
