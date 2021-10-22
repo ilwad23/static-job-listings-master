@@ -47,7 +47,7 @@ function App() {
       <header className="App-header">
         <img
           className="bg-header"
-          src={`./images/bg-header-desktop.svg`}
+          src={`./images/bg-header-${desktopOrMobile}.svg`}
         />
         {tags.length > 0 && (
           <div className="filter ">
