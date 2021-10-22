@@ -1,13 +1,14 @@
 @media all and (max-width: 700px) {
   .wrapper {
-    position: relative;
     display: block;
     overflow-y: visible;
     width: 86.4%;
     height: 258px;
     margin-bottom: 40px;
   }
-
+.filter {
+  flex-wrap: wrap;
+}
   .info {
     display: block;
     margin: auto;

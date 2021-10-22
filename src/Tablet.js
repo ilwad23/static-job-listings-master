@@ -17,11 +17,11 @@ function Tablet({
   languages,
   tools,
 }) {
-  const [{tags}, dispatch] = useStateValue();
-  const [value,setValue] = useState([]);
-  useEffect(() => {
-   dispatch({ type: "SET_TAGS", tags:[...new Set(value)] });
-  }, [value])
+  const [{ tags }, dispatch] = useStateValue();
+function setTags(value) {  
+  dispatch({ type: "SET_TAGS", tags: [...new Set(value)] });
+  dispatch({ type: "FILTER_TAGS" });
+}
   return (
     <div className="wrapper tablet">
       {FEATURED && <div className="rec"></div>}
@@ -46,19 +46,19 @@ function Tablet({
         </div>
       </div>
       <div className="right">
-        <div className="tag" onClick={() => setValue([...tags, role])}>
+        <div className="tag" onClick={() => setTags([...tags, role])}>
           {role}
         </div>
-        <div className="tag" onClick={() => setValue([...tags, level])}>
+        <div className="tag" onClick={() => setTags([...tags, level])}>
           {level}
         </div>
         {languages.map((language) => (
-          <div className="tag" onClick={() => setValue([...tags, language])}>
+          <div className="tag" onClick={() => setTags([...tags, language])}>
             {language}
           </div>
         ))}
         {tools.map((tool) => (
-          <div className="tag" onClick={() => setValue([...tags, tool])}>
+          <div className="tag" onClick={() => setTags([...tags, tool])}>
             {tool}
           </div>
         ))}

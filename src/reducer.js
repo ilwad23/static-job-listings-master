@@ -1,8 +1,7 @@
 import Data from "./data";
 export const initialState = {
   tags: [],
-  filteredData: [],
-  changing:false,
+  filteredData: Data,
 };
 
 const reducer = (state, action) => {
@@ -11,10 +10,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         tags: action.tags,
-        changing: true,
       };
     case "FILTER_TAGS":
-      console.log(state.tags,12);
       const filterData = Data.filter((item) => {
         let items = [item.role, item.level, ...item.languages, ...item.tools];
         if (state.tags.length === 0) return item;
@@ -24,21 +21,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         filteredData: filterData,
-        changing: false,
       };
-    // case "CLEAR_TAGS":
-    //   return {
-    //     ...state,
-    //     tags: [],
-    //   };
     case "CANCEL_TAG":
-    //   const filterTags = state.tags.filter((tag) => action.tag !== tag);
-    //   return {
-    //     ...state,
-    //     tags: filterTags,
-    //   };
-
-    // case "REMOVE_FROM_BASKET":
       const index = state.tags.indexOf(action.tag);
       let newTags = [...state.tags];
 
@@ -52,7 +36,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         tags: newTags,
-        changing:true
+      };
+    case "CLEAR_TAGS":
+      return {
+        ...state,
+        tags: [],
+        filteredData: Data,
       };
     default:
       return state;

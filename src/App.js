@@ -5,7 +5,6 @@ import Tablet from "./Tablet";
 import "./tabletDesktop.css";
 import "./tabletMobile.css";
 
-
 const useScreenSize = () => {
   const [size, setSize] = useState(window.innerWidth);
   useEffect(() => {
@@ -19,10 +18,13 @@ const useScreenSize = () => {
 
 function App() {
   const desktopOrMobile = useScreenSize();
-  const [{ tags, filteredData, changing }, dispatch] = useStateValue();
-  useEffect(() => {
-    dispatch({ type: "FILTER_TAGS"});
-  },[changing]);
+  const [{ tags, filteredData }, dispatch] = useStateValue();
+
+  function cancelTag(tag) {
+    dispatch({ type: "CANCEL_TAG", tag: tag });
+    dispatch({ type: "FILTER_TAGS" });
+  }
+
   const tablets = filteredData.map((item) => (
     <Tablet
       key={item.id}
@@ -45,7 +47,7 @@ function App() {
       <header className="App-header">
         <img
           className="bg-header"
-          src={`./images/bg-header-${desktopOrMobile}.svg`}
+          src={`/images/bg-header-${desktopOrMobile}.svg`}
         />
         {tags.length > 0 && (
           <div className="filter ">
@@ -55,7 +57,7 @@ function App() {
                   <div className="filterTag">{tag}</div>
                   <div
                     className="filterCancel"
-                    onClick={() => dispatch({ type: "CANCEL_TAG", tag: tag })}
+                    onClick={() => cancelTag(tag)}
                   >
                     <img src="./images/icon-remove.svg" />
                   </div>
@@ -64,7 +66,7 @@ function App() {
             </div>
             <p
               className="filterClear"
-              // onClick={() => dispatch({ type: "CLEAR_TAGS" })}
+              onClick={() => dispatch({ type: "CLEAR_TAGS" })}
             >
               Clear
             </p>
