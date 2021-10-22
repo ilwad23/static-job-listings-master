@@ -45,20 +45,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img
-          className="bg-header"
-          src={`/images/bg-header-${desktopOrMobile}.svg`}
-        />
+        <img className="bg-header" src={`/images/bg-header-desktop.svg`} />
         {tags.length > 0 && (
           <div className="filter ">
             <div className="filterTags ">
               {tags.map((tag) => (
                 <div className="filterTagWrapper">
                   <div className="filterTag">{tag}</div>
-                  <div
-                    className="filterCancel"
-                    onClick={() => cancelTag(tag)}
-                  >
+                  <div className="filterCancel" onClick={() => cancelTag(tag)}>
                     <img src="./images/icon-remove.svg" />
                   </div>
                 </div>
