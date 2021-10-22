@@ -45,7 +45,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img className="bg-header" src={`/images/bg-header-desktop.svg`} />
+        <img
+          className="bg-header"
+          src={`./images/bg-header-desktop.svg`}
+        />
         {tags.length > 0 && (
           <div className="filter ">
             <div className="filterTags ">
